@@ -1,0 +1,29 @@
+#cloud-config
+#https://cloudinit.readthedocs.io/en/latest/topics/examples.html
+hostname: master01
+fqdn: master01-k8s.svtech.com
+bootcmd:
+  - echo 192.168.30.150 master01-k8s  >> /etc/hosts
+  - echo 192.168.30.151 master02-k8s  >> /etc/hosts
+  - echo 192.168.30.152 master03-k8s  >> /etc/hosts
+  - echo 192.168.30.153 worker01-k8s  >> /etc/hosts
+  - echo 192.168.30.154 worker02-k8s  >> /etc/hosts
+  - echo 192.168.30.154 worker03-k8s  >> /etc/hosts
+runcmd:
+ - [ sh, -xc, "echo $(date) ': hello world!'" ]
+ssh_pwauth: true
+disable_root: false
+chpasswd:
+  list: |
+     root:admin123
+  expire: false
+users:
+  - name: cloud
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    home: /home/cloud
+    shell: /bin/bash
+    lock_passwd: false
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDbFRpR97+QFh+Qdh/ulfiOGh6dYvthkaU/wrGXkgPFtF2FJADJg7APiBN3VtP4SY2f3PrRDtbaeVnR60qm1XvMuHc0wP/DJd0NNax5Ff5KtNs7f7fd4GouYQZ0Euviki92gAfOoJbQudwoO0XQQqggb8lcz1XLDP9n1QMcx57cf/UtKR6XNT2lje///8Rn4EklauCWnWh94f5woo2KQAvBlaa7Iy0N3+59Lic/3+dK3XeXhYISczIRneif3qFn9dqaIDS666LTdot5aVFTpNHO0UG4t70QPdHyECqpMZJBsry3RBLOMNpgxt+lMy+aHvdOd6ocw1pAH6EaeQTm2TLb0ogMtRgW2jNPlVUmt/5D0dpA+LHOVHAMqKEw/uCVeGz/bRAZzJD3HKqEvyl0igNNhFYf9fsFUIikFp95yrnki3wzU0hHVWnBuxlO2VM2E9mzuY3GJkz3/xDSNxdoQrcfbN/dpvBeRqEuSx//RvKcnwESnqyBa8FoTzIlJdMAPHU= root@localhost.localdomain
+final_message: "The system is finally up, after $UPTIME seconds"
