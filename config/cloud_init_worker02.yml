@@ -3,12 +3,12 @@
 hostname: worker02-k8s
 fqdn: worker02-k8s.svtech.com
 bootcmd:
-  - echo 192.168.30.150 master01-k8s  >> /etc/hosts
-  - echo 192.168.30.151 master02-k8s  >> /etc/hosts
-  - echo 192.168.30.152 master03-k8s  >> /etc/hosts
-  - echo 192.168.30.153 worker01-k8s  >> /etc/hosts
-  - echo 192.168.30.154 worker02-k8s  >> /etc/hosts
-  - echo 192.168.30.154 worker03-k8s  >> /etc/hosts
+  - echo 192.168.30.180 master01-k8s  >> /etc/hosts
+  - echo 192.168.30.181 master02-k8s  >> /etc/hosts
+  - echo 192.168.30.182 master03-k8s  >> /etc/hosts
+  - echo 192.168.30.183 worker01-k8s  >> /etc/hosts
+  - echo 192.168.30.184 worker02-k8s  >> /etc/hosts
+  - echo 192.168.30.185 worker03-k8s  >> /etc/hosts
 runcmd:
  - [ sh, -xc, "echo $(date) ': hello world!'" ]
 ssh_pwauth: true
